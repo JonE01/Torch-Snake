@@ -86,17 +86,17 @@ class PongGame:
             if ballx-(self.ball_radius/2)==0 or ballx-(self.ball_radius/2)<0:
                 ballx,bally = self.center
                 fails += 1
-                print('{} fails'.format(fails))
+                #print('{} fails'.format(fails))
             #check paddle collision for ball
-            if ballx-(self.ball_radius/2)==paddle.x+self.paddle_width or ballx-(self.ball_radius/2)<paddle.x+self.paddle_width:
-                if bally-(self.ball_radius/2)>paddle.y or bally-(self.ball_radius/2)==paddle.y:
-                    if bally+(self.ball_radius/2)==paddle.y+self.paddle_height or bally+(self.ball_radius/2)<paddle.y+self.paddle_height:
+            if ballx-(self.ball_radius/2)<=paddle.x+self.paddle_width:
+                if bally-(self.ball_radius/2)>=paddle.y:
+                    if bally+(self.ball_radius/2)<=paddle.y+self.paddle_height:
                         if self.ballxvel<0:
                             self.ballxvel*=-1
                             hits+=1
 
             #check top and bottom collision for balls
-            if bally+(self.ball_radius/2) == self.screen_height or bally+(self.ball_radius/2)>self.screen_height or bally-(self.ball_radius/2)==0 or bally-(self.ball_radius/2)<0:
+            if bally+(self.ball_radius/2)>=self.screen_height or bally-(self.ball_radius/2)<=0:
                 self.ballyvel *= -1
 
             #update ball position
