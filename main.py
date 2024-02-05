@@ -123,12 +123,13 @@ def eval_genomes(genomes, config):
         if force_quit:
             quit()
 def run_neat(config):
-    p = neat.Population(config)
+    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-20')
+    #p = neat.Population(config)
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
-    winner = p.run(eval_genomes, 50)
+    winner = p.run(eval_genomes, 20)
     with open("best.pickle","wb") as f:
         pickle.dump(winner,f)
 
